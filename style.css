@@ -274,3 +274,79 @@ body {
   .laufband__spur { width: auto; justify-content: center; }
   #laufband-text-2 { display: none; }
 }
+
+/* ---------- Blättern im Spruch-Archiv ---------- */
+.brief__nav { display: flex; align-items: center; justify-content: center; gap: .8rem; }
+.pfeil {
+  flex: none;
+  width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center;
+  font: 800 1.9rem/1 "Nunito", sans-serif; padding-bottom: 4px;
+  color: #fff; cursor: pointer;
+  border: 3px solid #fff;
+  background: linear-gradient(180deg, #ffb3d9 0%, var(--rosa) 45%, var(--rot) 100%);
+  box-shadow: 0 0 0 2px var(--rot-dunkel), 0 4px 8px rgba(122, 69, 96, .3);
+  text-shadow: 0 1px 2px rgba(120, 20, 40, .5);
+  transition: transform .15s ease;
+}
+.pfeil:hover:not(:disabled) { transform: scale(1.08); }
+.pfeil:disabled { opacity: .3; cursor: default; box-shadow: 0 0 0 2px #e9b8cf; }
+.pfeil:focus-visible, .knopf:focus-visible, .link-knopf:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.brief__nav .brief__datum { min-width: 0; flex: 1; max-width: 16rem; }
+.brief--archiv .brief__papier { background-color: #fff6fb; }
+.brief__heute { margin: .8rem 0 0; min-height: 0; }
+.link-knopf {
+  font: 800 1rem "Nunito", sans-serif; color: var(--tanne);
+  background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* ---------- Knöpfe Speichern / Teilen ---------- */
+.aktionen { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: 1.4rem; }
+.knopf {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font: 800 1.1rem "Nunito", sans-serif; color: #fff; text-decoration: none;
+  padding: .75rem 1.3rem; border-radius: 999px; cursor: pointer;
+  border: 3px solid #fff;
+  background: linear-gradient(180deg, #ffb3d9 0%, var(--rosa) 45%, var(--rot) 100%);
+  box-shadow: 0 0 0 2px var(--rot-dunkel), 0 6px 12px rgba(122, 69, 96, .28);
+  text-shadow: 0 1px 2px rgba(120, 20, 40, .5);
+  position: relative; overflow: hidden;
+  transition: transform .15s ease;
+}
+.knopf::after { content: ""; position: absolute; left: 8%; right: 8%; top: 2px; height: 42%; border-radius: 999px; background: rgba(255,255,255,.35); pointer-events: none; }
+.knopf:hover { transform: translateY(-2px); }
+.knopf:disabled { opacity: .6; cursor: wait; }
+.knopf--gruen { background: linear-gradient(180deg, #a8e6cf 0%, #4fb58c 50%, var(--tanne) 100%); box-shadow: 0 0 0 2px #23735a, 0 6px 12px rgba(47, 143, 107, .3); text-shadow: 0 1px 2px rgba(20, 70, 50, .6); }
+.knopf--hell { background: #fff; color: var(--rot); text-shadow: none; box-shadow: 0 0 0 2px var(--rosa), 0 4px 8px rgba(122, 69, 96, .15); }
+
+/* ---------- Bildvorschau ---------- */
+.bild-dialog {
+  width: min(460px, calc(100% - 32px)); max-height: calc(100% - 32px); overflow: auto;
+  border: 0; border-radius: 18px; padding: 1.2rem 1.2rem 1.4rem;
+  background: var(--papier); color: var(--text); text-align: center;
+  box-shadow: 0 0 0 4px #fff, 0 0 0 7px var(--rosa), 0 20px 40px rgba(74, 31, 51, .4);
+}
+.bild-dialog::backdrop { background: rgba(74, 31, 51, .55); }
+.bild-dialog h2 { margin: 0 0 .8rem; font: 400 1.6rem "Pacifico", cursive; color: var(--rot); }
+.bild-dialog img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 6px 16px rgba(122, 69, 96, .25); -webkit-touch-callout: default; }
+.bild-hinweis { margin: 1rem 0 0; font-size: 1rem; line-height: 1.45; color: var(--text-weich); }
+.bild-dialog .aktionen { margin-top: 1rem; }
+
+/* ---------- Hinweis-Meldung ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 28px; z-index: 30;
+  translate: -50% 20px; opacity: 0; pointer-events: none;
+  width: max-content; max-width: calc(100% - 40px);
+  padding: .8rem 1.2rem; border-radius: 14px;
+  background: var(--tanne); color: #fff; font-weight: 800; text-align: center;
+  box-shadow: 0 0 0 3px #fff, 0 8px 20px rgba(0,0,0,.2);
+  transition: opacity .25s ease, translate .25s ease;
+}
+.toast.sichtbar { opacity: 1; translate: -50% 0; }
+
+@media (max-width: 420px) {
+  .knopf { font-size: 1rem; padding: .7rem 1.05rem; }
+  .pfeil { width: 42px; height: 42px; }
+  .brief__nav { gap: .4rem; }
+  .brief__nav .brief__datum { font-size: .92rem; white-space: nowrap; }
+}

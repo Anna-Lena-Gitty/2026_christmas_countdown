@@ -1,7 +1,8 @@
 # 🎄 Countdown bis Heiligabend 2026
 
 Ein Tages-Countdown vom 19.11. bis 24.12.2026 im kitschigen Y2K-Weihnachtslook:
-- jeden Tag ein neuer Spruch im Brief,
+- jeden Tag ein neuer Spruch im Brief – frühere Sprüche lassen sich nachlesen (‹ ›), künftige nicht,
+- Spruch als Bild speichern und teilen (WhatsApp & Co.),
 - je näher Heiligabend rückt, desto mehr Schneeflocken (❄, ✦, Pixel-Herzen),
 - an Heiligabend Konfetti.
 
@@ -15,7 +16,7 @@ Reine HTML/CSS/JavaScript-Seite ohne Build-Schritt, direkt für GitHub Pages gee
 | `style.css` | Gestaltung, Farben, Animationen |
 | `script.js` | Countdown, Spruch des Tages, Schnee, Konfetti |
 | `sprueche.js` | **Die 36 Sprüche** – hier kannst du Texte ändern |
-| `fonts/` | Schriften lokal (Nunito, Pacifico, Rubik – SIL Open Font License) |
+| `*.woff2` | Schriften lokal (Nunito, Pacifico, Rubik – SIL Open Font License) |
 | `.nojekyll` | sorgt dafür, dass GitHub Pages die Dateien unverändert ausliefert |
 
 ## Veröffentlichen mit GitHub Pages (Weg über den Browser)
@@ -48,8 +49,8 @@ Danach Schritt 6 oben (Settings → Pages).
 
 ## Testen & Vorschau
 
-- **Ein bestimmtes Datum ansehen:** `?datum=JJJJ-MM-TT` an die Adresse hängen, z. B.
-  `…/weihnachts-countdown/?datum=2026-12-24` (Heiligabend mit Konfetti).
+- Einen Test-Parameter für ein anderes Datum gibt es bewusst nicht, damit niemand vorspringen kann.
+  Zum Testen die Uhrzeit/das Datum am eigenen Gerät umstellen.
 - **Lokal öffnen:** Doppelklick auf `index.html` funktioniert, die Chrom-Schrift lädt aber
   nur über einen Webserver korrekt, z. B.:
   ```bash
