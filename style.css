@@ -1,7 +1,7 @@
 /* ---------- Schriften (lokal, keine Verbindung zu Google) ---------- */
-@font-face { font-family: "Nunito"; src: url("fonts/nunito.woff2") format("woff2"); font-weight: 200 1000; font-display: swap; }
-@font-face { font-family: "Pacifico"; src: url("fonts/pacifico.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Rubik"; src: url("fonts/rubik-black.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("nunito.woff2") format("woff2"); font-weight: 200 1000; font-display: swap; }
+@font-face { font-family: "Pacifico"; src: url("pacifico.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Rubik"; src: url("rubik-black.woff2") format("woff2"); font-weight: 900; font-display: swap; }
 
 /* ---------- Farben ---------- */
 :root {
