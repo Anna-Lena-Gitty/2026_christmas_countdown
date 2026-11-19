@@ -1,0 +1,276 @@
+/* ---------- Schriften (lokal, keine Verbindung zu Google) ---------- */
+@font-face { font-family: "Nunito"; src: url("fonts/nunito.woff2") format("woff2"); font-weight: 200 1000; font-display: swap; }
+@font-face { font-family: "Pacifico"; src: url("fonts/pacifico.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Rubik"; src: url("fonts/rubik-black.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+
+/* ---------- Farben ---------- */
+:root {
+  --rosa: #ff8fc7;
+  --rosa-hell: #ffd3ea;
+  --rot: #e5484d;
+  --rot-dunkel: #b8323a;
+  --tanne: #2f8f6b;
+  --mint: #a8e6cf;
+  --gold: #f4c95d;
+  --lebkuchen: #c68b59;
+  --creme: #fff8f0;
+  --text: #4a1f33;
+  --text-weich: #7a4560;
+  --papier: #fffdf8;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Nunito", system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--text);
+  background-color: var(--creme);
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(255, 143, 199, .35), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(168, 230, 207, .45), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(244, 201, 93, .3), transparent 50%),
+    linear-gradient(180deg, #fff8f0 0%, #ffe3f1 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* ---------- Zuckerstangen-Rand ---------- */
+.zuckerrand {
+  position: fixed; inset: 0; z-index: 5; pointer-events: none;
+  border: 10px solid transparent;
+  border-image: repeating-linear-gradient(45deg, var(--rot) 0 12px, #fff 12px 24px) 10;
+}
+
+/* ---------- Canvas für Schnee & Konfetti ---------- */
+#schnee, #konfetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+#schnee { z-index: 0; }
+#konfetti { z-index: 20; }
+
+/* ---------- Laufband ---------- */
+.laufband {
+  position: relative; z-index: 3;
+  margin: 10px 10px 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--tanne), #23735a);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: .55rem 0;
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 3px 0 rgba(0,0,0,.08);
+}
+.laufband__spur { display: flex; width: max-content; animation: laufen 28s linear infinite; }
+.laufband__spur span { white-space: nowrap; padding-right: 3rem; }
+@keyframes laufen { to { transform: translateX(-50%); } }
+
+/* ---------- Bühne ---------- */
+.buehne {
+  position: relative; z-index: 2;
+  width: min(640px, calc(100% - 32px));
+  margin: 2.5rem auto 1rem;
+  display: grid; gap: 2.5rem;
+}
+
+/* ---------- Sticker ---------- */
+.sticker-feld { position: absolute; inset: -20px -140px; pointer-events: none; }
+.sticker {
+  position: absolute; width: 84px; height: 84px;
+  filter: drop-shadow(0 4px 6px rgba(122, 69, 96, .3));
+  animation: schweben 5s ease-in-out infinite;
+}
+.s1 { top: -10px;  left: 10px;  transform: rotate(-12deg); }
+.s2 { top: 140px;  left: 0;     animation-delay: -1s; }
+.s3 { top: 330px;  left: 30px;  animation-delay: -2s; width: 96px; height: 96px; }
+.s4 { top: 640px;  left: 0;     animation-delay: -3s; width: 104px; height: 104px; }
+.s5 { top: -20px;  right: 20px; animation-delay: -1.5s; }
+.s6 { top: 260px;  right: 0;    animation-delay: -2.5s; width: 64px; height: 64px; }
+.s7 { top: 480px;  right: 30px; animation-delay: -.5s; }
+.s8 { top: 720px;  right: 10px; animation-delay: -3.5s; }
+@keyframes schweben {
+  0%, 100% { translate: 0 0; rotate: -6deg; }
+  50%      { translate: 0 -10px; rotate: 6deg; }
+}
+
+/* ---------- Retro-Fenster ---------- */
+.fenster {
+  position: relative;
+  background: #fff;
+  border: 3px solid #fff;
+  border-radius: 14px 14px 10px 10px;
+  box-shadow:
+    0 0 0 2px var(--rot-dunkel),
+    0 14px 30px rgba(122, 69, 96, .25);
+  overflow: hidden;
+}
+.fenster__titel {
+  display: flex; align-items: center; gap: .5rem;
+  padding: .45rem .6rem .45rem .8rem;
+  background: linear-gradient(180deg, #ffb3d9 0%, var(--rosa) 45%, var(--rot) 100%);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(120, 20, 40, .6);
+  position: relative;
+}
+.fenster__titel::after { /* Glanzstreifen */
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 45%;
+  background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.1));
+  pointer-events: none;
+}
+.fenster__titel h1 { margin: 0; font-size: 1.05rem; font-weight: 800; letter-spacing: .02em; flex: 1; }
+.fenster__icon { font-size: 1.1rem; }
+.fenster__knoepfe { display: flex; gap: 4px; position: relative; z-index: 1; }
+.fenster__knoepfe i {
+  font-style: normal; font-weight: 800; font-size: .9rem; line-height: 1;
+  width: 24px; height: 22px; display: grid; place-items: center;
+  border: 1.5px solid #fff; border-radius: 5px;
+  background: linear-gradient(180deg, #ffd3ea, #ff8fc7);
+}
+.fenster__knoepfe i.x { background: linear-gradient(180deg, #ff8a8a, var(--rot-dunkel)); }
+
+.fenster__inhalt {
+  padding: 1.6rem 1.4rem 1.6rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255, 211, 234, .7), transparent 50%),
+    radial-gradient(circle at 80% 85%, rgba(168, 230, 207, .55), transparent 50%),
+    #fffafc;
+}
+.vorzeile, .unterzeile { margin: 0; font-weight: 800; color: var(--tanne); font-size: 1.25rem; }
+.vorzeile { font-family: "Pacifico", cursive; font-weight: 400; color: var(--rot); font-size: 1.6rem; }
+
+/* Chrom-Bubble-Zahl */
+.zahl {
+  margin: .1rem 0 .2rem;
+  font-family: "Rubik", "Nunito", sans-serif;
+  font-weight: 900;
+  font-size: clamp(6rem, 30vw, 11rem);
+  line-height: 1;
+  background: linear-gradient(180deg,
+    #ffffff 0%, #ffe1f0 22%, #ff8fc7 46%, #c2185b 50%,
+    #ff8fc7 64%, #ffe1f0 88%, #ffffff 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
+  filter:
+    drop-shadow(0 0 0 #fff)
+    drop-shadow(3px 3px 0 var(--rot-dunkel))
+    drop-shadow(0 8px 12px rgba(194, 24, 91, .35));
+  animation: wackeln 3.2s ease-in-out infinite;
+  display: inline-block;
+}
+.zahl.lang { font-size: clamp(2.6rem, 11vw, 4.5rem); line-height: 1.15; }
+@keyframes wackeln {
+  0%, 100% { transform: rotate(-2deg) scale(1); }
+  50%      { transform: rotate(2deg) scale(1.03); }
+}
+
+/* Ladebalken */
+.lade { margin-top: 1.4rem; text-align: left; }
+.lade__text { margin: 0 0 .4rem; font-weight: 800; color: var(--text-weich); display: flex; justify-content: space-between; gap: 1rem; }
+.lade__text b { color: var(--rot); }
+.lade__balken {
+  height: 28px; padding: 3px;
+  border-radius: 8px;
+  background: #fff;
+  border: 2px solid #e9b8cf;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.12);
+}
+.lade__fuellung {
+  height: 100%; width: 0;
+  border-radius: 5px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,0) 55%),
+    repeating-linear-gradient(-45deg, var(--rot) 0 10px, #fff 10px 20px);
+  background-size: 100% 100%, 28px 28px;
+  animation: streifen 1.2s linear infinite;
+  transition: width 1.2s ease-out;
+}
+@keyframes streifen { to { background-position: 0 0, 28px 0; } }
+
+/* ---------- Kitschiger Brief ---------- */
+.brief { position: relative; }
+.brief__spitze {
+  position: absolute; left: 50%; top: -30px; translate: -50% 0; z-index: 2;
+}
+.brief__siegel { width: 72px; height: 72px; filter: drop-shadow(0 4px 4px rgba(120, 20, 40, .35)); }
+.brief__papier {
+  position: relative;
+  padding: 3rem 1.8rem 1.8rem;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 34px, rgba(255, 143, 199, .18) 34px 35px),
+    var(--papier);
+  border-radius: 6px;
+  border: 3px double var(--rosa);
+  outline: 10px solid var(--rosa-hell);
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 13px #fff,
+    0 0 0 15px var(--rosa),
+    0 16px 32px rgba(122, 69, 96, .3);
+  text-align: center;
+}
+/* Ecken-Herzchen */
+.brief__papier::before, .brief__papier::after {
+  content: "♥"; position: absolute; font-size: 1.3rem; color: var(--rot);
+}
+.brief__papier::before { left: 10px; bottom: 6px; }
+.brief__papier::after  { right: 10px; bottom: 6px; }
+
+.brief__datum { margin: 0; color: var(--tanne); font-weight: 800; font-size: 1rem; letter-spacing: .02em; }
+.brief__titel {
+  margin: .2rem 0 1rem;
+  font-family: "Pacifico", cursive; font-weight: 400;
+  font-size: clamp(1.7rem, 6vw, 2.2rem);
+  color: var(--rot);
+  text-shadow: 2px 2px 0 var(--rosa-hell);
+}
+.brief__spruch { margin: 0; }
+.brief__spruch p {
+  margin: 0;
+  font-size: clamp(1.25rem, 4.6vw, 1.55rem);
+  line-height: 1.5;
+  font-weight: 800;
+  color: var(--text);
+  animation: einblenden 1.2s ease-out both;
+}
+.brief__spruch footer { margin-top: .6rem; font-size: 1rem; color: var(--text-weich); font-style: italic; }
+@keyframes einblenden { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+.brief__gruss { margin: 1.6rem 0 0; text-align: right; color: var(--text-weich); font-size: 1.05rem; }
+.brief__gruss span { font-family: "Pacifico", cursive; color: var(--rot); font-size: 1.25rem; }
+
+/* ---------- Fuß ---------- */
+.fuss {
+  position: relative; z-index: 2;
+  text-align: center; padding: 1.5rem 1rem 2.2rem;
+  color: var(--text-weich); font-weight: 800;
+}
+
+/* ---------- Kleine Bildschirme ---------- */
+@media (max-width: 960px) {
+  .buehne { margin-top: 3.6rem; }
+  .sticker-feld { inset: -30px -6px; }
+  .sticker { width: 58px; height: 58px; }
+  .s3, .s4 { width: 64px; height: 64px; }
+  .s1 { top: -4px; left: -8px; }
+  .s5 { top: -6px; right: -6px; }
+  .s2, .s3, .s6, .s7 { display: none; }
+  .s4 { top: auto; bottom: -40px; left: -10px; }
+  .s8 { top: auto; bottom: -46px; right: -6px; }
+}
+@media (max-width: 420px) {
+  .fenster__inhalt { padding: 1.2rem 1rem; }
+  .brief__papier { padding: 2.8rem 1.1rem 1.4rem; }
+  .lade__text { font-size: .95rem; }
+  .laufband { font-size: 1rem; }
+}
+
+/* ---------- Weniger Bewegung, wenn gewünscht ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .laufband__spur, .sticker, .zahl, .lade__fuellung, .brief__spruch p { animation: none; }
+  .laufband__spur { width: auto; justify-content: center; }
+  #laufband-text-2 { display: none; }
+}
